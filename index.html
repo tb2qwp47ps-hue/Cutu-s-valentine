@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Vedansh 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Quicksand',sans-serif;
+  background:linear-gradient(135deg,#ffd6e0,#ffeef4);
+  overflow:hidden;
+}
+
+.page{
+  display:none;
+  height:100vh;
+  width:100vw;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:25px;
+}
+
+.active{display:flex;}
+
+.card{
+  background:#fff;
+  padding:30px;
+  border-radius:30px;
+  max-width:380px;
+  box-shadow:0 20px 40px rgba(255,105,135,.3);
+  border:3px dashed #ff8fab;
+}
+
+h1{
+  font-family:'Pacifico',cursive;
+  color:#ff5c8a;
+}
+
+button{
+  background:#ff5c8a;
+  border:none;
+  color:white;
+  padding:12px 25px;
+  border-radius:30px;
+  font-size:16px;
+  margin-top:15px;
+  cursor:pointer;
+}
+
+.envelope{
+  font-size:100px;
+  cursor:pointer;
+  animation:bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+
+.flowers{font-size:30px;}
+
+.heart{
+  position:absolute;
+  font-size:24px;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);opacity:1;}
+  to{transform:translateY(-10vh);opacity:0;}
+}
+
+/* Hide YouTube video */
+#player{
+  position:absolute;
+  width:1px;
+  height:1px;
+  opacity:0;
+}
+</style>
+</head>
+
+<body>
+
+<!-- YouTube Player -->
+<iframe
+  id="player"
+  src="https://www.youtube.com/embed/vGJTaP6anOU?enablejsapi=1&loop=1&playlist=vGJTaP6anOU"
+  frameborder="0"
+  allow="autoplay">
+</iframe>
+
+<!-- PAGE 0: Envelope -->
+<div class="page active" id="p0">
+  <div>
+    <div class="envelope" onclick="openLetter()">💌</div>
+    <p>Tap to open</p>
+  </div>
+</div>
+
+<!-- PAGE 1: Letter -->
+<div class="page" id="p1">
+  <div class="card">
+    <h1>My cutu better half 💗</h1>
+    <p>
+      Vedansh Jain,<br><br>
+      I can’t help falling in love with you —
+      a little more every single day.
+      You are my calm, my joy, my forever 💕
+    </p>
+    <div class="flowers">🌷 🌷 🌻 🌻</div>
+    <button onclick="nextPage(2)">Next 💞</button>
+  </div>
+</div>
+
+<!-- PAGE 2: Our Song -->
+<div class="page" id="p2">
+  <div class="card">
+    <h1>Our Song 🎶</h1>
+    <p>
+      This song feels like us —
+      soft, timeless, and full of love 💗
+    </p>
+    <button onclick="nextPage(3)">One last thing 💕</button>
+  </div>
+</div>
+
+<!-- PAGE 3: Valentine Question -->
+<div class="page" id="p3">
+  <div class="card">
+    <h1>Will you be my Valentine? 💍</h1>
+    <button onclick="yes()">YES 💖</button>
+  </div>
+</div>
+
+<script>
+const pages=["p0","p1","p2","p3"];
+let player;
+
+function openLetter(){
+  nextPage(1);
+  player = document.getElementById("player").contentWindow;
+  player.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+}
+
+function nextPage(n){
+  pages.forEach(p=>document.getElementById(p).classList.remove("active"));
+  document.getElementById("p"+n).classList.add("active");
+}
+
+function yes(){
+  alert("I knew it 😌💗 Happy Valentine’s Day!");
+  for(let i=0;i<30;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💗";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  }
+}
+</script>
+
+</body>
+</html>
